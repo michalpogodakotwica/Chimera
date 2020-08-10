@@ -78,7 +78,7 @@ namespace Mediator
 
             Observable.FromEvent<Field>(
                     h => _boardView.OnFieldTapped += h,
-                    h => _boardView.OnFieldTapped += h
+                    h => _boardView.OnFieldTapped -= h
                 )
                 .Subscribe(_model.OnFieldTapped)
                 .AddTo(_modelListeners);
@@ -90,7 +90,7 @@ namespace Mediator
             
             Observable.FromEvent(
                     h => _hudView.SkipTurnButtonClicked += h,
-                    h => _hudView.SkipTurnButtonClicked += h
+                    h => _hudView.SkipTurnButtonClicked -= h
                 )
                 .Subscribe(_ => _model.EndTurn())
                 .AddTo(_modelListeners);

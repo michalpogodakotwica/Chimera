@@ -8,7 +8,7 @@ namespace Mediator
 {
     public class ActiveCharactersViewModelMediator : IDisposable
     {
-        private readonly CompositeDisposable _modelListeners = new CompositeDisposable();
+        private readonly CompositeDisposable _modelListenersDisposable = new CompositeDisposable();
         private readonly IBoardView _view;
         private readonly Arena _model;
         
@@ -23,11 +23,7 @@ namespace Mediator
         {
             _model.ActiveCharacters.ObserveAdd()
                 .Subscribe(OnCharacterAdded)
-                .AddTo(_modelListeners);
-            
-            _model.ActiveCharacters.ObserveRemove()
-                .Subscribe(OnCharacterRemoved)
-                .AddTo(_modelListeners);
+                .AddTo(_modelListenersDisposable);
         }
         
         private void OnCharacterAdded(CollectionAddEvent<Character> addEvent)
@@ -48,21 +44,19 @@ namespace Mediator
                 .Subscribe(removeEvent =>
                 {
                     if (removeEvent.Value == addEvent.Value)
+                    {
                         agentDisposables.Dispose();
+                        _view.RemoveCharacter(removeEvent.Value);
+                    }
                 })
                 .AddTo(agentDisposables);
             
-            agentDisposables.AddTo(_modelListeners);
-        }
-        
-        private void OnCharacterRemoved(CollectionRemoveEvent<Character> removeEvent)
-        {
-            _view.RemoveCharacter(removeEvent.Value);
+            agentDisposables.AddTo(_modelListenersDisposable);
         }
 
         public void Dispose()
         {
-            _modelListeners?.Dispose();
+            _modelListenersDisposable?.Dispose();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace View
     public enum FieldHighlightType
     {
         Default = 0,
-        Walkable = 1,
+        Walkable = 1 << 0,
         ActiveCharacter =  1 << 1,
         Path = 1 << 2,
         PossibleTarget = 1 << 3,
