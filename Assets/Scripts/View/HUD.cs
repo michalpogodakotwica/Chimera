@@ -10,7 +10,7 @@ namespace View
         public event Action SkipTurnButtonClicked;
 
         [SerializeField] 
-        private Button _skipTurnButton;
+        private Button _skipTurnButton = default;
 
         private IDisposable _skipButtonDisposable;
         

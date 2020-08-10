@@ -12,13 +12,13 @@ using View;
 public class Arena : MonoBehaviour
 {
 	[SerializeField]
-	private SquareBoardGenerator _squareBoardGenerator;
+	private SquareBoardGenerator _squareBoardGenerator = default;
 	
 	[SerializeField] 
-	private SquareGridBoardView _boardView;
-	
-	[SerializeField] 
-	private HUD _hud;
+	private SquareGridBoardView _boardView = default;
+
+	[SerializeField]
+	private HUD _hud = default;
 	
 	private readonly ReactiveCollection<Character> _activeCharacters = new ReactiveCollection<Character>();
 	private readonly ReactiveCollection<Character> _turnQueue = new ReactiveCollection<Character>();

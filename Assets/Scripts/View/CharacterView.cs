@@ -7,13 +7,13 @@ namespace View
     public class CharacterView : MonoBehaviour, ICharacterView, IDisposable
     {
         [SerializeField]
-        private TextMeshProUGUI _healthText;
+        private TextMeshProUGUI _healthText = default;
 
         [SerializeField] 
-        private Material[] _teamsMaterials;
+        private Material[] _teamsMaterials = default;
 
         [SerializeField] 
-        private Renderer _characterRenderer;
+        private Renderer _characterRenderer = default;
         
         public void SetTeam(int team)
         {

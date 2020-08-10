@@ -16,10 +16,10 @@ namespace View
         public event Action<Field> OnFieldTapped;
 
         [SerializeField] 
-        private CharacterView _characterPrefab;
+        private CharacterView _characterPrefab = default;
         
         [SerializeField] 
-        private FieldView _tilePrefab;
+        private FieldView _tilePrefab = default;
         
         private GridPositionConverter _positionConverter;
         

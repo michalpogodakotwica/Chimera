@@ -9,7 +9,7 @@ namespace Input
     public class Input : MonoBehaviour, InputActions.IGameplayActions
     {
         [SerializeField]
-        private Camera _camera;
+        private Camera _camera = default;
 
         [SerializeField]
         private float _maxTapTime = 0.4f;

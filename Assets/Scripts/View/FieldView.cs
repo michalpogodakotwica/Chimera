@@ -9,20 +9,20 @@ namespace View
     public class FieldView : MonoBehaviour, IFieldView, IDisposable
     {
         [SerializeField] 
-        private Material _walkableMaterial;
+        private Material _walkableMaterial = default;
         [SerializeField] 
-        private Material _defaultMaterial;
+        private Material _defaultMaterial = default;
         [SerializeField] 
-        private Material _pathMaterial;
+        private Material _pathMaterial = default;
         [SerializeField] 
-        private Material _possibleTargetMaterial;
+        private Material _possibleTargetMaterial = default;
         [SerializeField] 
-        private Material _controlledCharacterMaterial;
+        private Material _controlledCharacterMaterial = default;
         [SerializeField] 
-        private Material _targetMaterial;
+        private Material _targetMaterial = default;
 
         [SerializeField] 
-        private Renderer _fieldRenderer;
+        private Renderer _fieldRenderer = default;
         
         private Dictionary<FieldHighlightType, Material> _highlightToMaterial;
         
