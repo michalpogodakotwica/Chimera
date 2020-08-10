@@ -11,10 +11,13 @@ namespace View
 
         [SerializeField] 
         private Material[] _teamsMaterials;
+
+        [SerializeField] 
+        private Renderer _characterRenderer;
         
         public void SetTeam(int team)
         {
-            gameObject.GetComponentInChildren<Renderer>(true).material = _teamsMaterials[team];
+            _characterRenderer.material = _teamsMaterials[team];
         }
         
         public void SetCharacterHealth(int health)

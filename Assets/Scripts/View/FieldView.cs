@@ -21,6 +21,9 @@ namespace View
         [SerializeField] 
         private Material _targetMaterial;
 
+        [SerializeField] 
+        private Renderer _fieldRenderer;
+        
         private Dictionary<FieldHighlightType, Material> _highlightToMaterial;
         
         public void Awake()
@@ -43,7 +46,7 @@ namespace View
 
         public void SetHighlight(FieldHighlightType fieldHighlightType)
         {
-            gameObject.GetComponentInChildren<Renderer>(true).material = _highlightToMaterial[fieldHighlightType];
+            _fieldRenderer.material = _highlightToMaterial[fieldHighlightType];
         }
 
         public void Dispose()
