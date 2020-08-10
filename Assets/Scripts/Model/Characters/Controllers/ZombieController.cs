@@ -37,14 +37,9 @@ namespace Model.Characters.Controllers
             if(character.OccupiedField == null)
                 arena.StartNextTurn();
 
-            var enemiesInAttackRange = arena.Board
-                .GetFieldsInRange(character.OccupiedField, 1, CollisionDetectionType.None)
-                .Select(f => f.OccupiedBy)
-                .Where(c => c != null && c.Team != character.Team)
-                .ToArray();
-            
-            if(enemiesInAttackRange.Any())
-                character.Attack(enemiesInAttackRange.First());
+            var validAttackTargets = character.AttackAction.ValidTargets(character, arena.Board).ToArray();
+            if(validAttackTargets.Any())
+                character.AttackAction.ApplyOnTarget(character, validAttackTargets.First());
 
             arena.StartNextTurn();
         }

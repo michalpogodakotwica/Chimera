@@ -41,13 +41,13 @@ namespace Assets.Scripts
                         break;
                     
                     case FieldType.Player:
-                        var playerCharacter = new Character($"Player {playerIndex}", 2, 3, playerController, 0, new Damage(1));
+                        var playerCharacter = new Character($"Player {playerIndex}", 2, 3, playerController, 0, new AttackAction(1, 1));
                         playerCharacter.MoveTo(squareGridBoard.Tiles[x, y]);
                         playerIndex++;
                         break;
                     
                     case FieldType.Zombie:
-                        var zombie = new Character($"Zombie {enemyIndex}", 2, 1, zombieController, 1, new Damage(1));
+                        var zombie = new Character($"Zombie {enemyIndex}", 2, 1, zombieController, 1, new AttackAction(1, 1));
                         zombie.MoveTo(squareGridBoard.Tiles[x, y]);
                         enemyIndex++;
                         break;

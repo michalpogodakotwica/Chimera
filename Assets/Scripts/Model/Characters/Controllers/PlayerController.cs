@@ -45,9 +45,8 @@ namespace Model.Characters.Controllers
                 if(field != _activeCharacter.OccupiedField)
                     _validMovementTargets.Add(field);
 
-            foreach (var field in _arena.Board.GetFieldsInRange(_activeCharacter.OccupiedField, 1, CollisionDetectionType.None))
-                if (field.OccupiedBy != null && field.OccupiedBy.Team != _activeCharacter.Team)
-                    _validAttackTargets.Add(field);
+            foreach (var field in _activeCharacter.AttackAction.ValidTargets(_activeCharacter, _arena.Board))
+                _validAttackTargets.Add(field);
 
             if(_validAttackTargets.Count == 0 && _movementLeft < MovementEndPrecision)
                 EndTurn();
@@ -86,7 +85,7 @@ namespace Model.Characters.Controllers
                 if (_attackTarget.Value == field)
                 {
                     _movementLeft -= _currentPathLength;
-                    _activeCharacter.Attack(field.OccupiedBy);
+                    _activeCharacter.AttackAction.ApplyOnTarget(_activeCharacter, field);
                     EndTurn();
                     return;
                 }

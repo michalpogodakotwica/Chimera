@@ -10,7 +10,6 @@ namespace Model.Characters
     public class Character : IDisposable
     {
         public readonly string ID;
-        
         public readonly int Team;
         
         public event Action<Character> OnDispose;
@@ -18,20 +17,20 @@ namespace Model.Characters
         private readonly ReactiveProperty<int> _health;
         private readonly ReactiveProperty<int> _speed;
         private readonly ReactiveCollection<ICharacterEffect> _turnModifiers;
-        private readonly IAction _attackAction;
 
         public IController Controller { get; }
         public Field OccupiedField { get; private set; }
+        public IAttackAction AttackAction { get; }
 
         public event Action<Field> OnMoved;
 
-        public Character(string id, int health, int speed, IController controller, int team, IAction attackAction)
+        public Character(string id, int health, int speed, IController controller, int team, IAttackAction attackAction)
         {
             ID = id;
             _health = new ReactiveProperty<int>(health);
             _speed = new ReactiveProperty<int>(speed);
             _turnModifiers = new ReactiveCollection<ICharacterEffect>();
-            _attackAction = attackAction;
+            AttackAction = attackAction;
             Controller = controller;
             Team = team;
         }
@@ -65,13 +64,7 @@ namespace Model.Characters
         public void EndTurn()
         {
             foreach (var turnModifier in _turnModifiers)
-                turnModifier.OnTurnStarted(this);
-        }
-
-        public void Attack(Character other)
-        {
-            Debug.Log($"{ID} attacks {other.ID}");
-            _attackAction.Apply(other);
+                turnModifier.OnTurnEnded(this);
         }
         
         public void DealDamage(int damage)
